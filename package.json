@@ -1,0 +1,17 @@
+{
+  "name": "FITH-token-sale",
+  "version": "1.0.0",
+  "description": "FITH Token Sale ICO",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "dev": "lite-server"
+  },
+  "author": "Sam (Fiatech LTD)",
+  "license": "MIT",
+  "devDependencies": {
+    "lite-server": "^2.3.0"
+  }
+}

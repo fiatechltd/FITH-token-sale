@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FITH Token ICO Sale</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container" style="width: 650px;">
+      <div class="row">
+        <div class="col-lg-12">
+            <h1 class="text-center">FITH TOKEN SALE</h1>
+            <hr/>
+            <br/>
+        </div>
+        <div id="loader">
+          <p class="text-center">Loading...</p>
+        </div>
+        <div id="content" class="text-center"> <!--style="display: none;"-->
+          <p>
+            Token price: <span class="token-price"></span> Ether.
+			<br/>
+			You currently have: <span class="user-balance"></span>&nbsp;FITH.
+          </p>
+          <br/>
+		  <button type="submit" onclick="App.loadTokensOnTokenSaleContract();">Load tokens on ICO sale</button>
+		  <button type="submit" onclick="App.checkICOtokens();">Check ICO sale tokens</button>
+		  <button type="submit" onclick="App.updateTokenPrice();">Update token price</button>
+		  <!--<button type="submit" onclick="App.withdrawTokens();">Withdraw tokens</button>-->
+		  <button type="submit" onclick="App.endICO();">End ICO</button>
+		  <button type="submit" onclick="App.buyTokensSendingEther();">Send ether</button>
+		  <button type="submit" onclick="App.checkPromoEth();">Check Promo Eth</button>
+		  <form onSubmit="App.buyTokens(); return false;" role="form">
+            <div class="form-group">
+              <div class="input-group">
+                <input id="numberOfTokens" class="form-control input-lg" type="number" name="number" value="1" min="1" pattern="[0-9]">
+                </input>
+                <span class="input-group-btn">
+                  <button type="submit" class="btn btn-primary btn-lg">Buy Tokens</button>
+                </span>
+              </div>
+            </div>
+          </form>
+          <br>
+           <div class="progress">
+              <div id="progress" class="progress-bar progress-bar-striped active" aria-valuemin="0" aria-valuemax="100">
+              </div>
+            </div>
+          <p>Tokens sold: <span class="tokens-sold"></span> / <span class="tokens-total"></span></p>
+          <hr>
+          <p id="account"></p>
+        </div>
+      </div>
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/web3.min.js"></script>
+    <script src="js/truffle-contract.min.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

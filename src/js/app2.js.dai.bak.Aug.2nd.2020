@@ -1,0 +1,404 @@
+App2 = {
+	web3Provider: null,
+	loading: false,
+	contracts: {},
+	//contractsDir: './build/contracts/',
+	contractsDir: './contracts/',
+	daiContractAddress: "0xdfF68ceABfE9396Ff6e6b7deCeA09DBbAeEC7138", //local test address
+	tokenSaleContractAddress: "0xcE4C4ea15DA7b6B096f0113E8185cE40dEE91e58", //local test address
+	//daiContractAddress: "0x6B175474E89094C44Da98b954EedeAC495271d0F", //LIVE address
+	//tokenSaleContractAddress: "", //LIVE address
+	account: '0x0',
+	daiContractDecimals: 18,
+	ethDecimals: 18,
+	daiContractUserBalance: 0, //user dai balance available in his own wallet
+	daiContractUserAllowance: 0, //user approved amount for deposit to token-sale contract for eth promo
+	tokenSaleUserDaiDeposit: 0, //user dai balance deposited to token-sale contract for eth promo
+	ethPromoUserBalance: 0, //eth available for user to buy at promotion
+	
+	load: async () => {
+		console.log("loadWeb3...");
+		await App2.loadWeb3()
+		console.log("loadAccount...");
+		await App2.loadAccount()
+		await App2.listenForAccountChange()
+		console.log("loadContract...");
+		await App2.loadContract()
+		console.log("App2.daiContractDecimals: " + App2.daiContractDecimals);
+		console.log("App2.ethDecimals: " + App2.ethDecimals);
+		console.log("loadBalances...");
+		await App2.loadBalances()
+		console.log("render...");
+		await App2.render()
+		//await App2.showHomepage();
+		console.log("end...");
+	},
+	
+	// https://medium.com/metamask/https-medium-com-metamask-breaking-change-injecting-web3-7722797916a8
+	loadWeb3: async () => {
+		if (typeof web3 !== 'undefined') {
+			App2.web3Provider = web3.currentProvider
+			web3 = new Web3(web3.currentProvider)
+		} else {
+			window.alert("Please connect to Metamask.")
+		}
+		// Modern dapp browsers...
+		if (window.ethereum) {
+			window.web3 = new Web3(ethereum)
+			try {
+				// Request account access if needed
+				await ethereum.enable()
+				// Accounts now exposed
+				console.log('window.ethereum => Accounts now exposed');
+				///web3.eth.sendTransaction({/* ... */})
+				console.log('window.ethereum => Accounts now exposed2');
+			} catch (error) {
+				// User denied account access...
+			}
+		}
+		// Legacy dapp browsers...
+		else if (window.web3) {
+			App2.web3Provider = web3.currentProvider
+			window.web3 = new Web3(web3.currentProvider)
+			// Accounts always exposed
+			console.log('window.web3 => Accounts always exposed');
+			///web3.eth.sendTransaction({/* ... */})
+			console.log('window.web3 => Accounts always exposed2');
+		}
+		// Non-dapp browsers...
+		else {
+			console.log('Non-Ethereum browser detected. You should consider trying MetaMask!')
+		}
+	},
+	
+	loadAccount: async () => {
+		// Set the current blockchain account
+		App2.account = web3.eth.accounts[0]
+		console.log("App2.account: " + App2.account);
+	},
+	
+	listenForAccountChangeLoopFn: async () => {
+		if (web3.eth.accounts[0] !== App2.account) {
+			await App2.loadAccount();
+			await App2.loadBalances();
+			await App2.render();
+		}
+	},
+	
+	listenForAccountChange: async () => {
+		// listen for new account selected
+		setInterval(() => { App2.listenForAccountChangeLoopFn(); }, 1000);
+	},
+	
+	loadContract: async () => {
+		// Create a JavaScript version of the smart contract
+		const daiFullPath = App2.contractsDir + "DaiToken.json";
+		console.log("loadContract.daiFullPath => " + daiFullPath);
+		let abi = (await $.getJSON(daiFullPath)).abi;
+		const daiContract = web3.eth.contract(abi);
+		App2.daiContract = daiContract.at(App2.daiContractAddress);
+		
+		const tokenSaleFullPath = App2.contractsDir + "FITHTokenSaleRefAndPromo.json";
+		console.log("loadContract.tokenSaleFullPath => " + tokenSaleFullPath);
+		let abi2 = (await $.getJSON(tokenSaleFullPath)).abi;
+		const tokenSaleContract = web3.eth.contract(abi2);
+		App2.tokenSaleContract = tokenSaleContract.at(App2.tokenSaleContractAddress);
+	},
+	
+	loadBalances: async () => {
+		try {
+			await App2.loadDaiContractUserBalance();
+			await App2.loadDaiContractUserAllowance();
+			await App2.loadTokenSaleUserDaiDeposit();
+			await App2.loadTokenSaleUserEthBalance();
+		} catch(err) {
+			console.log("loadBalances err: " + err.toString());
+		}
+	},
+	
+	loadDaiContractUserBalance: async () => {
+		// get DAI user balance
+		let promiseFn1 = () => {
+			return new Promise((resolve, reject) => {
+				App2.daiContract.balanceOf.call(App2.account, (err, res) => {
+					if (err) {
+						console.log("App2.daiContract.balanceOf(" + App2.account + ") ERROR: " + JSON.stringify(err));
+						reject(err);
+					}
+					let num = res.toNumber() / Math.pow(10, App2.daiContractDecimals);
+					App2.daiContractUserBalance = num.toFixed(App2.daiContractDecimals);
+					console.log('App2.daiContractUserBalance: ' + App2.daiContractUserBalance);
+					resolve(App2.daiContractUserBalance);
+				});
+			});
+		};
+		
+		try {
+			await promiseFn1();
+		} catch(err) {
+			console.log("loadDaiContractUserBalance err: " + err.toString());
+		}
+	},
+	
+	loadDaiContractUserAllowance: async () => {
+		// get DAI user allowance for deposit to token-sale
+		let promiseFn1 = () => {
+			return new Promise((resolve, reject) => {
+				App2.daiContract.allowance.call(App2.account, App2.tokenSaleContractAddress, (err, res) => {
+					if (err) {
+						console.log("App2.daiContract.balanceOf(" + App2.account + ") ERROR: " + JSON.stringify(err));
+						reject(err);
+					}
+					let num = res.toNumber() / Math.pow(10, App2.daiContractDecimals);
+					App2.daiContractUserAllowance = num.toFixed(App2.daiContractDecimals);
+					console.log('App2.daiContractUserAllowance: ' + App2.daiContractUserAllowance);
+					resolve(App2.daiContractUserAllowance);
+				});
+			});
+		};
+		
+		try {
+			await promiseFn1();
+		} catch(err) {
+			console.log("loadDaiContractUserAllowance err: " + err.toString());
+		}
+	},
+	
+	loadTokenSaleUserDaiDeposit: async () => {
+		// get DAI user deposit on token-sale
+		let promiseFn1 = () => {
+			return new Promise((resolve, reject) => {
+				App2.tokenSaleContract.daiBalances.call(App2.account, (err, res) => {
+					if (err) {
+						console.log("App2.tokenSaleContract.daiBalances(" + App2.account + ") ERROR: " + JSON.stringify(err));
+						reject(err);
+					}
+					let num = res.toNumber() / Math.pow(10, App2.daiContractDecimals);
+					App2.tokenSaleUserDaiDeposit = num.toFixed(App2.daiContractDecimals);
+					console.log('App2.tokenSaleUserDaiDeposit: ' + App2.tokenSaleUserDaiDeposit);
+					resolve(App2.tokenSaleUserDaiDeposit);
+				});
+			});
+		};
+		
+		try {
+			await promiseFn1();
+		} catch(err) {
+			console.log("loadTokenSaleUserDaiDeposit err: " + err.toString());
+		}
+	},
+	
+	loadTokenSaleUserEthBalance: async () => {
+		// get ETH available for user to buy at promotion with discount on the token-sale contract
+		let promiseFn1 = () => {
+			return new Promise((resolve, reject) => {
+				App2.tokenSaleContract.ethBalances.call(App2.account, (err, res) => {
+					if (err) {
+						console.log("App2.tokenSaleContract.ethBalances(" + App2.account + ") ERROR: " + JSON.stringify(err));
+						reject(err);
+					}
+					let num = res.toNumber() / Math.pow(10, App2.ethDecimals);
+					App2.ethPromoUserBalance = num;
+					console.log('App2.ethPromoUserBalance: ' + App2.ethPromoUserBalance);
+					resolve(App2.ethPromoUserBalance);
+				});
+			});
+		};
+		
+		try {
+			await promiseFn1();
+		} catch(err) {
+			console.log("loadTokenSaleUserEthBalance err: " + err.toString());
+		}
+	},
+	
+	
+	
+	renderAccount: async () => {
+		// Render Account
+		$('#accountAddress').html(App2.account)
+	},
+	
+	renderBalances: async () => {
+		// Render balances
+		//$('.new-token-balance').val(App2.oldContractUserBalance.toString()); //this is for input text field
+		$('.dai-user-balance').html(App2.daiContractUserBalance);
+		$('.dai-allowance').html(App2.daiContractUserAllowance);
+		$('.dai-deposit-balance').html(App2.tokenSaleUserDaiDeposit);
+		$('.eth-promo-available').html(App2.ethPromoUserBalance);
+	},
+	
+	render: async () => {
+		// Prevent double render
+		if (App2.loading) {
+			return
+		}
+		
+		// Update App2 loading state
+		App2.setLoading(true)
+		
+		// Render Account
+		App2.renderAccount()
+		
+		// Render balances
+		App2.renderBalances()
+		
+		// Update loading state
+		App2.setLoading(false)
+	},
+	
+	setLoading: (boolean) => {
+		App2.loading = boolean
+		const loader = $('#loader')
+		const content = $('#content')
+		
+		/*if (boolean) {
+			loader.show()
+			content.hide()
+		} else {
+			loader.hide()
+			content.show()
+		}*/
+	},
+	
+	updateLastTx: async (tx_hash) => {
+		let tx_link = 'https://etherscan.io/tx/' + tx_hash;
+		console.log('updateLastTx >> ' + tx_link);
+		
+		$('.last-tx-info').prop('hidden', false);
+		$('.last-tx-link')
+		.prop('text', tx_hash)
+		.prop('href', tx_link);
+	},
+	
+	/*test_updateLastTx: async () => {
+		let hash = '0x79fb4fbdfe33491ff00e6c9aa8bf117e7465de725612193edea852c65953b75b';
+		await App2.updateLastTx(hash);
+	},*/
+	
+	approveDaiDeposit: async () => {
+		var promise1 = new Promise((resolve, reject) => {
+			let rawDaiToAllow = $('.dai-approve-to-deposit').val() * Math.pow(10, App2.daiContractDecimals);
+			console.log('***approveDaiDeposit.rawDaiToAllow: ' + rawDaiToAllow);
+			console.log('***approveDaiDeposit.App2.tokenSaleContractAddress: ' + App2.tokenSaleContractAddress);
+			
+			App2.daiContract.approve(App2.tokenSaleContractAddress, rawDaiToAllow, {from: App2.account, gas: 150000},
+			(err, res) => {
+				if (err) {
+					var err1 = "App2.daiContract.approve(" + App2.tokenSaleContractAddress + ", " + rawDaiToAllow + ") ERROR: " + JSON.stringify(err);
+					console.log(err1);
+					reject(err1);
+				}
+				resolve(res);
+			});
+		});
+		
+		try {
+			let tx = await promise1;
+			console.log('***approveDaiDeposit.promise1 return >>');
+			console.log(JSON.stringify(tx));
+			await App2.updateLastTx(tx);
+			await App2.loadDaiContractUserAllowance();
+			await App2.renderBalances();
+		} catch(err) {
+			console.log('approveDaiDeposit.promise1 err: ' + err.toString());
+		}
+	},
+	
+	depositDai: async () => {
+		var promise1 = new Promise((resolve, reject) => {
+			let rawDaiToDeposit = $('.dai-to-deposit').val() * Math.pow(10, App2.daiContractDecimals);
+			console.log('***depositDai.rawDaiToDeposit: ' + rawDaiToDeposit);
+			console.log('***depositDai.App2.tokenSaleContractAddress: ' + App2.tokenSaleContractAddress);
+			
+			App2.tokenSaleContract.depositDaiAfterApproval(App2.account, rawDaiToDeposit, {from: App2.account, gas: 150000},
+			(err, res) => {
+				if (err) {
+					var err1 = "App2.tokenSaleContract.depositDaiAfterApproval(" + App2.account + ", " + rawDaiToDeposit + ") ERROR: " + JSON.stringify(err);
+					console.log(err1);
+					reject(err1);
+				}
+				resolve(res);
+			});
+		});
+		
+		try {
+			let tx = await promise1;
+			console.log('***depositDai.promise1 return >>');
+			console.log(JSON.stringify(tx));
+			await App2.updateLastTx(tx);
+			await App2.loadDaiContractUserAllowance();
+			await App2.loadDaiContractUserBalance();
+			await App2.loadTokenSaleUserDaiDeposit();
+			await App2.renderBalances();
+		} catch(err) {
+			console.log('depositDai.promise1 err: ' + err.toString());
+		}
+	},
+	
+	withdrawDai: async () => {
+		var promise1 = new Promise((resolve, reject) => {
+			let rawDaiToWithdraw = $('.dai-to-withdraw').val() * Math.pow(10, App2.daiContractDecimals);
+			console.log('***withdrawDai.rawDaiToWithdraw: ' + rawDaiToWithdraw);
+			console.log('***withdrawDai.App2.tokenSaleContractAddress: ' + App2.tokenSaleContractAddress);
+			
+			App2.tokenSaleContract.withdrawDai(rawDaiToWithdraw, {from: App2.account, gas: 150000},
+			(err, res) => {
+				if (err) {
+					var err1 = "App2.tokenSaleContract.withdrawDai(" + rawDaiToWithdraw + ") ERROR: " + JSON.stringify(err);
+					console.log(err1);
+					reject(err1);
+				}
+				resolve(res);
+			});
+		});
+		
+		try {
+			let tx = await promise1;
+			console.log('***withdrawDai.promise1 return >>');
+			console.log(JSON.stringify(tx));
+			await App2.updateLastTx(tx);
+			await App2.loadDaiContractUserBalance();
+			await App2.loadTokenSaleUserDaiDeposit();
+			await App2.renderBalances();
+		} catch(err) {
+			console.log('withdrawDai.promise1 err: ' + err.toString());
+		}
+	},
+	
+	buyEthPromo: async () => {
+		var promise1 = new Promise((resolve, reject) => {
+			let ethWeiToBuy = $('.eth-promo-to-buy').val() * Math.pow(10, App2.ethDecimals);
+			console.log('***buyEthPromo.ethWeiToBuy: ' + ethWeiToBuy);
+			console.log('***buyEthPromo.App2.tokenSaleContractAddress: ' + App2.tokenSaleContractAddress);
+			
+			App2.tokenSaleContract.buyEthAtDiscount(ethWeiToBuy, {from: App2.account, gas: 150000},
+			(err, res) => {
+				if (err) {
+					var err1 = "App2.tokenSaleContract.buyEthAtDiscount(" + ethWeiToBuy + ") ERROR: " + JSON.stringify(err);
+					console.log(err1);
+					reject(err1);
+				}
+				resolve(res);
+			});
+		});
+		
+		try {
+			let tx = await promise1;
+			console.log('***buyEthPromo.promise1 return >>');
+			console.log(JSON.stringify(tx));
+			await App2.updateLastTx(tx);
+			await App2.loadTokenSaleUserDaiDeposit();
+			await App2.loadTokenSaleUserEthBalance();
+			await App2.renderBalances();
+		} catch(err) {
+			console.log('buyEthPromo.promise1 err: ' + err.toString());
+		}
+	},
+}
+
+$(() => {
+	$(window).load(() => {
+		App2.load()
+	})
+})

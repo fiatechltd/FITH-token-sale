@@ -1,0 +1,173 @@
+pragma solidity ^0.5.0;
+
+import "./IERC20.sol";
+import "./SafeMathLib.sol";
+import "./FITHTokenSale.sol";
+
+/**
+ * @dev Fiatech FITH token sale contract.
+ */
+contract FITHTokenSaleReferrals is FITHTokenSale
+{
+	using SafeMathLib for uint;
+	
+	uint public referralPercent = 5; // x is x%
+	uint public referralTokensSpent; // total referral tokens given away
+	
+	// referral tokens bought event raised when buyer purchases tokens via referral link
+    event ReferralTokens(address _buyer, address _referer, uint256 _refererTokens);
+	
+	event DataLength(uint dataLength);
+	event DataLength2(string data, uint dataLength);
+	event DataLength3(bytes data, uint dataLength);
+	
+    // tokens bought event raised when buyer purchases tokens
+    //event TokensBought(address _buyer, uint256 _amount, uint256 _tokensSold);
+	
+	// token price update event
+	//event TokenPriceUpdate(address _admin, uint256 _tokenPrice);
+	
+	
+	
+	/**
+	 * @dev Constructor
+	 */
+    constructor(IERC20 _tokenContract, uint256 _tokenPrice)
+		FITHTokenSale(_tokenContract, _tokenPrice)
+		public
+	{
+    }
+	
+	modifier onlyOwner() {
+        require(msg.sender == owner, "Owner required");
+        _;
+    }
+	
+	
+	
+	function _buyTokens(uint256 _numberOfTokens) internal returns(bool) {
+		///require(super._buyTokens(_numberOfTokens), "_buyTokens base failed!");
+		
+		require(tokensAvailable() >= _numberOfTokens, "insufficient tokens on token-sale contract");
+        require(tokenContract.transfer(msg.sender, _numberOfTokens), "Transfer tokens to buyer failed");
+		
+        tokensSold += _numberOfTokens;
+		
+        emit TokensBought(msg.sender, _numberOfTokens, tokensSold);
+		
+		
+		
+		//if(msg.data.length == 20) {
+			 //emit ReferralTokens(msg.sender, msg.sender, 0);
+			address referer = bytesToAddress(bytes(msg.data));
+			 //emit ReferralTokens(msg.sender, referer, 1);
+			// self-referrer check
+			require(referer != msg.sender, "Referer is sender");
+			uint refererTokens = _numberOfTokens.mul(referralPercent).div(100);
+			// bonus for referrer
+			require(tokensAvailable() >= (_numberOfTokens + refererTokens), "insufficient referral tokens");
+			require(tokenContract.transfer(referer, refererTokens), "Transfer tokens to referer failed");
+			
+			referralTokensSpent += refererTokens;
+			
+			emit ReferralTokens(msg.sender, referer, refererTokens);
+			//return true;
+		//}
+		emit DataLength(msg.data.length);
+		return true;
+    }
+	
+	function bytesToAddress(bytes memory source) internal pure returns(address addr) {
+		require(source.length >= 20, "Read out of bounds");
+		
+		//return address(uint(uint8(source[0])));
+		
+		/*uint result = 0;
+		for (uint i = 0; i < source.length; i++) {
+			uint c = uint(uint8(source[i]));
+			if (c >= 48 && c <= 57) {
+				result = result * 16 + (c - 48);
+			}
+			if(c >= 65 && c<= 90) {
+				result = result * 16 + (c - 55);
+			}
+			if(c >= 97 && c<= 122) {
+				result = result * 16 + (c - 87);
+			}
+		}
+		return address(result);*/
+		
+		/*assembly {
+			addr := mload(add(source,20))
+			//addr := div(mload(add(add(source, 0x20), 0)), 0x1000000000000000000000000)
+		}*/
+		
+		uint result = 0;
+		uint mul = 1;
+		/*for(uint i = 20; i > 0; i--) {
+			result += uint8(source[i-1])*mul;
+			mul = mul*256;
+		}*/
+		for(uint i = 0; i < 20; i++) {
+			result += uint8(source[i])*mul;
+			mul = mul*256;
+		}
+		return address(result);
+  
+		/*uint160 addr = 0;
+		//uint mul = 1;
+		//for(uint i = 20; i > 0; i--) {
+		//	addr += uint8(source[i-1])*mul;
+		//	mul = mul*256;
+		//}
+		for(uint i = 0; i < 20; i++) {
+			addr *= 256;
+			addr += uint160(uint8(source[i]));
+		}
+		return address(addr);*/
+	}
+	
+	function stringToAddress() public payable returns(address addr) {
+		//emit DataLength3(msg.data, msg.data.length);
+		return bytesToAddress(bytes(msg.data));
+	}
+	
+	function stringToAddress2(string memory source) public returns(address addr) {
+		emit DataLength2(source, bytes(source).length);
+		return bytesToAddress(bytes(source));
+	}
+	
+	function stringToBytes(string memory source) public pure returns(bytes memory addr) {
+		return bytes(source);
+	}
+	
+	
+	
+	function buyTokens(uint256 _numberOfTokens) public payable {
+        //super.buyTokens(_numberOfTokens);
+		require(msg.value == (_numberOfTokens * tokenPrice), "Incorrect number of tokens");
+		_buyTokens(_numberOfTokens);
+		
+        /*if(msg.data.length == 20) {
+			_buyTokens2(_numberOfTokens, ...);
+		}
+		else {
+			_buyTokens(_numberOfTokens);
+		}*/
+    }
+	
+    /*function endSale() public onlyOwner {
+        require(tokenContract.transfer(owner, tokenContract.balanceOf(address(this))), "Transfer token-sale token balance to owner failed");
+		
+        // Just transfer the ether balance to the owner
+        owner.transfer(address(this).balance);
+    }*/
+	
+	/**
+	 * Accept ETH for tokens
+	 */
+    function () external payable {
+		uint tks = (msg.value).div(tokenPrice);
+		_buyTokens(tks);
+    }
+}

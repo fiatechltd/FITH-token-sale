@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="./favicon.ico">
+
+    <title>Fiatech ETH discount promotion</title>
+    
+	<!-- Bootstrap-extend -->
+	<!--<link rel="stylesheet" href="css/bootstrap-extend.css">-->
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	
+  </head>
+
+<body class="">
+
+<div class="container" style="width: 650px;">
+  <div class="row">
+	<div class="col-lg-12">
+		<h1 class="text-center">Promotion steps</h1>
+		<hr/>
+		<br/>
+	</div>
+	<!--<div id="loader">
+	  <p class="text-center">Loading...</p>
+	</div>-->
+	<div id="content" class="text-center">
+	  <p>
+		<h4>Balances</h4>
+		ETH promo available: <b><span class="eth-promo-available"></span></b>
+		<br/>
+		USDT wallet balance: <b><span class="usdt-user-balance"></span></b>
+		<br/>
+		My USDT deposit: <b><span class="usdt-deposit-balance"></span></b>
+		<br/>
+		My USDT allowance for deposit: <b><span class="usdt-allowance"></span></b>
+	  </p>
+	  <br/>
+	  <p>
+		<h4>Step 1 (USDT deposit/withdraw)</h4>
+		USDT approve to deposit <input type="text" class="usdt-approve-to-deposit"></input>
+		<button type="submit" onclick="App2.approveUSDTDeposit();" class="btn btn-primary btn-lg">USDT approve deposit</button>
+		<br/><br/>
+		USDT to deposit <input type="text" class="usdt-to-deposit"></input>
+		<button type="submit" onclick="App2.depositUSDT();" class="btn btn-primary btn-lg">USDT deposit</button>
+		<br/><br/>
+		USDT to withdraw <input type="text" class="usdt-to-withdraw"></input>
+	    <button type="submit" onclick="App2.withdrawUSDT();" class="btn btn-primary btn-lg">USDT withdraw</button>
+	  </p>
+	  <br/>
+	  <p>
+		<h4>Step 2 (ETH promo)</h4>
+		Buy ETH <input type="text" class="eth-promo-to-buy"></input>
+		<br/><br/>
+	    <button type="submit" onclick="App2.buyEthPromo();" class="btn btn-primary btn-lg">Buy ETH at discount</button>
+	  </p>
+	  <br>
+	  <p>
+		<h4>ETH promotion simulator</h4>
+		You can buy ETH <input type="text" class="eth-promo-sim"></input> for <b><span class="usdt-promo-sim">0</span></b> USDT
+		<br/><br/>
+	    <button type="submit" onclick="App2.simEthPromo();" class="btn btn-primary btn-lg">Get ETH promo cost</button>
+	  </p>
+	  <br>
+	  <button type="submit" onclick="App2.checkPromoEthCost();" class="btn btn-lg">Check Promo Eth Cost</button>
+	  <button type="submit" onclick="App2.checkPromoUSDTBalance();" class="btn btn-lg">Check My USDT</button>
+	  <button type="submit" onclick="App2.checkPromoEth();" class="btn btn-lg">Check Promo Eth</button>
+	  <button type="submit" onclick="App2.checkMyEth();" class="btn btn-lg">Check My Eth</button>
+	  <button type="submit" onclick="App2.checkTokenSaleEth();" class="btn btn-lg">Check token sale Eth</button>
+	  <br>
+	  <hr>
+	  <p id="accountAddress"></p>
+	  <br>
+	  <p class="last-tx-info" hidden>View last transaction on Etherscan: <a class="last-tx-link" href="" target="_blank"></a></p>
+	  <br>
+	</div>
+  </div>
+</div>
+<!-- ./wrapper -->
+  	
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <!--<script src="vendor/truffle-contract/dist/truffle-contract.js"></script>-->
+    <script src="js/app2.js"></script>
+</body>
+</html>

@@ -1,0 +1,998 @@
+{
+  "contractName": "DaiToken",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "name",
+      "outputs": [
+        {
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function",
+      "signature": "0x06fdde03"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "spender",
+          "type": "address"
+        },
+        {
+          "name": "tokens",
+          "type": "uint256"
+        }
+      ],
+      "name": "approve",
+      "outputs": [
+        {
+          "name": "success",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function",
+      "signature": "0x095ea7b3"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "totalSupply",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function",
+      "signature": "0x18160ddd"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "name": "tokens",
+          "type": "uint256"
+        }
+      ],
+      "name": "transferFrom",
+      "outputs": [
+        {
+          "name": "success",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function",
+      "signature": "0x23b872dd"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "decimals",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function",
+      "signature": "0x313ce567"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "_totalSupply",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function",
+      "signature": "0x3eaaf86b"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "standard",
+      "outputs": [
+        {
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function",
+      "signature": "0x5a3b7e42"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "tokenOwner",
+          "type": "address"
+        }
+      ],
+      "name": "balanceOf",
+      "outputs": [
+        {
+          "name": "balance",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function",
+      "signature": "0x70a08231"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function",
+      "signature": "0x8da5cb5b"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "symbol",
+      "outputs": [
+        {
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function",
+      "signature": "0x95d89b41"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "name": "tokens",
+          "type": "uint256"
+        }
+      ],
+      "name": "transfer",
+      "outputs": [
+        {
+          "name": "success",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function",
+      "signature": "0xa9059cbb"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "tokenOwner",
+          "type": "address"
+        },
+        {
+          "name": "spender",
+          "type": "address"
+        }
+      ],
+      "name": "allowance",
+      "outputs": [
+        {
+          "name": "remaining",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function",
+      "signature": "0xdd62ed3e"
+    },
+    {
+      "inputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor",
+      "signature": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "tokens",
+          "type": "uint256"
+        }
+      ],
+      "name": "Transfer",
+      "type": "event",
+      "signature": "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "spender",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "tokens",
+          "type": "uint256"
+        }
+      ],
+      "name": "Approval",
+      "type": "event",
+      "signature": "0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925"
+    }
+  ],
+  "bytecode": "0x608060405234801561001057600080fd5b50604080518082018252600381527f4441490000000000000000000000000000000000000000000000000000000000602080830191825283518085018552600981527f44616920546f6b656e0000000000000000000000000000000000000000000000818301528451808601909552600e85527f44616920546f6b656e2076312e300000000000000000000000000000000000009185019190915260008054600160a060020a0319163317905582519293909290916012916402540be400916100dc9160019190610178565b5083516100f0906002906020870190610178565b508251610104906003906020860190610178565b506004805460ff191660ff848116919091179182905516600a0a81026005819055336000818152600660209081526040808320859055805194855251929391927fddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef9281900390910190a35050505050610213565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f106101b957805160ff19168380011785556101e6565b828001600101855582156101e6579182015b828111156101e65782518255916020019190600101906101cb565b506101f29291506101f6565b5090565b61021091905b808211156101f257600081556001016101fc565b90565b610841806102226000396000f3006080604052600436106100b95763ffffffff7c010000000000000000000000000000000000000000000000000000000060003504166306fdde0381146100be578063095ea7b31461014857806318160ddd1461018057806323b872dd146101a7578063313ce567146101d15780633eaaf86b146101fc5780635a3b7e421461021157806370a08231146102265780638da5cb5b1461024757806395d89b4114610278578063a9059cbb1461028d578063dd62ed3e146102b1575b600080fd5b3480156100ca57600080fd5b506100d36102d8565b6040805160208082528351818301528351919283929083019185019080838360005b8381101561010d5781810151838201526020016100f5565b50505050905090810190601f16801561013a5780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b34801561015457600080fd5b5061016c600160a060020a0360043516602435610363565b604080519115158252519081900360200190f35b34801561018c57600080fd5b506101956103ca565b60408051918252519081900360200190f35b3480156101b357600080fd5b5061016c600160a060020a03600435811690602435166044356103d0565b3480156101dd57600080fd5b506101e6610530565b6040805160ff9092168252519081900360200190f35b34801561020857600080fd5b50610195610539565b34801561021d57600080fd5b506100d361053f565b34801561023257600080fd5b50610195600160a060020a036004351661059a565b34801561025357600080fd5b5061025c6105b5565b60408051600160a060020a039092168252519081900360200190f35b34801561028457600080fd5b506100d36105c4565b34801561029957600080fd5b5061016c600160a060020a036004351660243561061e565b3480156102bd57600080fd5b50610195600160a060020a0360043581169060243516610701565b6002805460408051602060018416156101000260001901909316849004601f8101849004840282018401909252818152929183018282801561035b5780601f106103305761010080835404028352916020019161035b565b820191906000526020600020905b81548152906001019060200180831161033e57829003601f168201915b505050505081565b336000818152600760209081526040808320600160a060020a038716808552908352818420869055815186815291519394909390927f8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925928290030190a35060015b92915050565b60055490565b600160a060020a0383166000908152600660205260408120548211156103f557600080fd5b600160a060020a038416600090815260076020908152604080832033845290915290205482111561042557600080fd5b600160a060020a03841660009081526006602052604090205461044e908363ffffffff61072c16565b600160a060020a038516600090815260066020908152604080832093909355600781528282203383529052205461048b908363ffffffff61072c16565b600160a060020a0380861660009081526007602090815260408083203384528252808320949094559186168152600690915220546104cf908363ffffffff6107a316565b600160a060020a0380851660008181526006602090815260409182902094909455805186815290519193928816927fddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef92918290030190a35060019392505050565b60045460ff1681565b60055481565b6003805460408051602060026001851615610100026000190190941693909304601f8101849004840282018401909252818152929183018282801561035b5780601f106103305761010080835404028352916020019161035b565b600160a060020a031660009081526006602052604090205490565b600054600160a060020a031681565b60018054604080516020600284861615610100026000190190941693909304601f8101849004840282018401909252818152929183018282801561035b5780601f106103305761010080835404028352916020019161035b565b6000600160a060020a038316151561063557600080fd5b3360009081526006602052604090205482111561065157600080fd5b33600090815260066020526040902054610671908363ffffffff61072c16565b3360009081526006602052604080822092909255600160a060020a038516815220546106a3908363ffffffff6107a316565b600160a060020a0384166000818152600660209081526040918290209390935580518581529051919233927fddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef9281900390910190a350600192915050565b600160a060020a03918216600090815260076020908152604080832093909416825291909152205490565b60008282111561079d57604080517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820181905260248201527f536166654d6174684c69622e7375623a2072657175697265642062203c3d2061604482015290519081900360640190fd5b50900390565b818101828110156103c457604080517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820181905260248201527f536166654d6174684c69622e6164643a2072657175697265642063203e3d2061604482015290519081900360640190fd00a165627a7a72305820dbe36451fed7f36cf6756b17df6b718155f48671201b485265887ff206d7fed60029",
+  "deployedBytecode": "0x6080604052600436106100b95763ffffffff7c010000000000000000000000000000000000000000000000000000000060003504166306fdde0381146100be578063095ea7b31461014857806318160ddd1461018057806323b872dd146101a7578063313ce567146101d15780633eaaf86b146101fc5780635a3b7e421461021157806370a08231146102265780638da5cb5b1461024757806395d89b4114610278578063a9059cbb1461028d578063dd62ed3e146102b1575b600080fd5b3480156100ca57600080fd5b506100d36102d8565b6040805160208082528351818301528351919283929083019185019080838360005b8381101561010d5781810151838201526020016100f5565b50505050905090810190601f16801561013a5780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b34801561015457600080fd5b5061016c600160a060020a0360043516602435610363565b604080519115158252519081900360200190f35b34801561018c57600080fd5b506101956103ca565b60408051918252519081900360200190f35b3480156101b357600080fd5b5061016c600160a060020a03600435811690602435166044356103d0565b3480156101dd57600080fd5b506101e6610530565b6040805160ff9092168252519081900360200190f35b34801561020857600080fd5b50610195610539565b34801561021d57600080fd5b506100d361053f565b34801561023257600080fd5b50610195600160a060020a036004351661059a565b34801561025357600080fd5b5061025c6105b5565b60408051600160a060020a039092168252519081900360200190f35b34801561028457600080fd5b506100d36105c4565b34801561029957600080fd5b5061016c600160a060020a036004351660243561061e565b3480156102bd57600080fd5b50610195600160a060020a0360043581169060243516610701565b6002805460408051602060018416156101000260001901909316849004601f8101849004840282018401909252818152929183018282801561035b5780601f106103305761010080835404028352916020019161035b565b820191906000526020600020905b81548152906001019060200180831161033e57829003601f168201915b505050505081565b336000818152600760209081526040808320600160a060020a038716808552908352818420869055815186815291519394909390927f8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925928290030190a35060015b92915050565b60055490565b600160a060020a0383166000908152600660205260408120548211156103f557600080fd5b600160a060020a038416600090815260076020908152604080832033845290915290205482111561042557600080fd5b600160a060020a03841660009081526006602052604090205461044e908363ffffffff61072c16565b600160a060020a038516600090815260066020908152604080832093909355600781528282203383529052205461048b908363ffffffff61072c16565b600160a060020a0380861660009081526007602090815260408083203384528252808320949094559186168152600690915220546104cf908363ffffffff6107a316565b600160a060020a0380851660008181526006602090815260409182902094909455805186815290519193928816927fddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef92918290030190a35060019392505050565b60045460ff1681565b60055481565b6003805460408051602060026001851615610100026000190190941693909304601f8101849004840282018401909252818152929183018282801561035b5780601f106103305761010080835404028352916020019161035b565b600160a060020a031660009081526006602052604090205490565b600054600160a060020a031681565b60018054604080516020600284861615610100026000190190941693909304601f8101849004840282018401909252818152929183018282801561035b5780601f106103305761010080835404028352916020019161035b565b6000600160a060020a038316151561063557600080fd5b3360009081526006602052604090205482111561065157600080fd5b33600090815260066020526040902054610671908363ffffffff61072c16565b3360009081526006602052604080822092909255600160a060020a038516815220546106a3908363ffffffff6107a316565b600160a060020a0384166000818152600660209081526040918290209390935580518581529051919233927fddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef9281900390910190a350600192915050565b600160a060020a03918216600090815260076020908152604080832093909416825291909152205490565b60008282111561079d57604080517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820181905260248201527f536166654d6174684c69622e7375623a2072657175697265642062203c3d2061604482015290519081900360640190fd5b50900390565b818101828110156103c457604080517f08c379a000000000000000000000000000000000000000000000000000000000815260206004820181905260248201527f536166654d6174684c69622e6164643a2072657175697265642063203e3d2061604482015290519081900360640190fd00a165627a7a72305820dbe36451fed7f36cf6756b17df6b718155f48671201b485265887ff206d7fed60029",
+  "sourceMap": "489:468:0:-;;;763:191;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;1082:417:2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;108:18:12;;-1:-1:-1;;;;;;108:18:12;116:10;108:18;;;1215:16:2;;1082:417;;;;;;880:2:0;;900:11;;1215:16:2;;108:18:12;;1082:417:2;1215:16;:::i;:::-;-1:-1:-1;1242:12:2;;;;:4;;:12;;;;;:::i;:::-;-1:-1:-1;1259:20:2;;;;:8;;:20;;;;;:::i;:::-;-1:-1:-1;1294:8:2;:20;;-1:-1:-1;;1294:20:2;;;;;;;;;;;;;1370:8;1361:2;:18;1344:35;;1329:12;:50;;;1403:10;-1:-1:-1;1394:20:2;;;:8;:20;;;;;;;;:35;;;1445:46;;;;;;1403:10;;-1:-1:-1;;1445:46:2;;;;;;;;;;1082:417;;;;;489:468:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;489:468:0;;;-1:-1:-1;489:468:0;:::i;:::-;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;:::o;:::-;;;;;;;",
+  "deployedSourceMap": "489:468:0:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;676:18:2;;8:9:-1;5:2;;;30:1;27;20:12;5:2;676:18:2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;8:100:-1;33:3;30:1;27:10;8:100;;;90:11;;;84:18;71:11;;;64:39;52:2;45:10;8:100;;;12:14;676:18:2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;3121:214;;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;3121:214:2;-1:-1:-1;;;;;3121:214:2;;;;;;;;;;;;;;;;;;;;;;;;;1694:88;;8:9:-1;5:2;;;30:1;27;20:12;5:2;1694:88:2;;;;;;;;;;;;;;;;;;;;3965:444;;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;3965:444:2;-1:-1:-1;;;;;3965:444:2;;;;;;;;;;;;730:21;;8:9:-1;5:2;;;30:1;27;20:12;5:2;730:21:2;;;;;;;;;;;;;;;;;;;;;;;761:24;;8:9:-1;5:2;;;30:1;27;20:12;5:2;761:24:2;;;;698:22;;8:9:-1;5:2;;;30:1;27;20:12;5:2;698:22:2;;;;2014:120;;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;2014:120:2;-1:-1:-1;;;;;2014:120:2;;;;;50:20:12;;8:9:-1;5:2;;;30:1;27;20:12;5:2;50:20:12;;;;;;;;-1:-1:-1;;;;;50:20:12;;;;;;;;;;;;;;649::2;;8:9:-1;5:2;;;30:1;27;20:12;5:2;649:20:2;;;;2490:339;;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;2490:339:2;-1:-1:-1;;;;;2490:339:2;;;;;;;4702:147;;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;4702:147:2;-1:-1:-1;;;;;4702:147:2;;;;;;;;;;676:18;;;;;;;;;;;;;;-1:-1:-1;;676:18:2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;3121:214::-;3219:10;3184:12;3211:19;;;:7;:19;;;;;;;;-1:-1:-1;;;;;3211:28:2;;;;;;;;;;;:37;;;3266;;;;;;;3184:12;;3211:28;;3219:10;;3266:37;;;;;;;;-1:-1:-1;3323:4:2;3121:214;;;;;:::o;1694:88::-;1762:12;;1694:88;:::o;3965:444::-;-1:-1:-1;;;;;4079:14:2;;4042:12;4079:14;;;:8;:14;;;;;;4069:24;;;4061:33;;;;;;-1:-1:-1;;;;;4123:13:2;;;;;;:7;:13;;;;;;;;4137:10;4123:25;;;;;;;;4113:35;;;4105:44;;;;;;-1:-1:-1;;;;;4175:14:2;;;;;;:8;:14;;;;;;:26;;4194:6;4175:26;:18;:26;:::i;:::-;-1:-1:-1;;;;;4158:14:2;;;;;;:8;:14;;;;;;;;:43;;;;4244:7;:13;;;;;4258:10;4244:25;;;;;;:37;;4274:6;4244:37;:29;:37;:::i;:::-;-1:-1:-1;;;;;4216:13:2;;;;;;;:7;:13;;;;;;;;4230:10;4216:25;;;;;;;:65;;;;4311:12;;;;;:8;:12;;;;;:24;;4328:6;4311:24;:16;:24;:::i;:::-;-1:-1:-1;;;;;4296:12:2;;;;;;;:8;:12;;;;;;;;;:39;;;;4349:26;;;;;;;4296:12;;4349:26;;;;;;;;;;;;;-1:-1:-1;4397:4:2;3965:444;;;;;:::o;730:21::-;;;;;;:::o;761:24::-;;;;:::o;698:22::-;;;;;;;;;;;;;;;-1:-1:-1;;698:22:2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2014:120;-1:-1:-1;;;;;2106:20:2;2074:12;2106:20;;;:8;:20;;;;;;;2014:120::o;50:20:12:-;;;-1:-1:-1;;;;;50:20:12;;:::o;649::2:-;;;;;;;;;;;;;;;-1:-1:-1;;649:20:2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2490:339;2549:12;-1:-1:-1;;;;;2576:16:2;;;;2568:25;;;;;;2615:10;2606:20;;;;:8;:20;;;;;;:30;-1:-1:-1;2606:30:2;2598:39;;;;;;2678:10;2669:20;;;;:8;:20;;;;;;:32;;2694:6;2669:32;:24;:32;:::i;:::-;2655:10;2646:20;;;;:8;:20;;;;;;:55;;;;-1:-1:-1;;;;;2727:12:2;;;;;;:24;;2744:6;2727:24;:16;:24;:::i;:::-;-1:-1:-1;;;;;2712:12:2;;;;;;:8;:12;;;;;;;;;:39;;;;2765:32;;;;;;;2712:12;;2774:10;;2765:32;;;;;;;;;;-1:-1:-1;2817:4:2;2490:339;;;;:::o;4702:147::-;-1:-1:-1;;;;;4813:19:2;;;4779:14;4813:19;;;:7;:19;;;;;;;;:28;;;;;;;;;;;;;4702:147::o;734:150:13:-;786:6;813;;;;805:51;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;871:5:13;;;734:150::o;459:::-;534:5;;;558:6;;;;550:51;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;",
+  "source": "pragma solidity ^0.4.26;\r\n\r\nimport \"./IERC20.sol\";\r\nimport \"./Owned.sol\";\r\nimport \"./ERC20TokenBase.sol\";\r\nimport \"./SafeMathLib.sol\";\r\n\r\n// ----------------------------------------------------------------------------\r\n// 'Dai stable coin token simulator' contract\r\n//\r\n// Symbol      : DAI\r\n// Name        : Dai stable coin token\r\n// Decimals    : 18\r\n//\r\n\r\n\r\n// This contract is used for FITHTokenSale testing purposes, we are specially interested in 18 decimals token contract as Dai.\r\ncontract DaiToken is IERC20, Owned, ERC20TokenBase\r\n{\r\n\tusing SafeMathLib for uint;\r\n\t\r\n    // ------------------------------------------------------------------------\r\n    // Constructor\r\n    // ------------------------------------------------------------------------\r\n    constructor()\r\n\t\tERC20TokenBase(\r\n\t\t\t\"DAI\" //symbol\r\n\t\t\t, \"Dai Token\" //name\r\n\t\t\t, \"Dai Token v1.0\" //standard\r\n\t\t\t, 18 //decimals\r\n\t\t\t, 10000000000 //_initialSupply\r\n\t\t)\r\n\t\tpublic\r\n\t{\r\n    }\r\n}",
+  "sourcePath": "C:/Users/Homeuser/Desktop/FITH-token-sale-v0.4.26/contracts/DaiToken.sol",
+  "ast": {
+    "absolutePath": "/C/Users/Homeuser/Desktop/FITH-token-sale-v0.4.26/contracts/DaiToken.sol",
+    "exportedSymbols": {
+      "DaiToken": [
+        26
+      ]
+    },
+    "id": 27,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".26"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:0"
+      },
+      {
+        "absolutePath": "/C/Users/Homeuser/Desktop/FITH-token-sale-v0.4.26/contracts/IERC20.sol",
+        "file": "./IERC20.sol",
+        "id": 2,
+        "nodeType": "ImportDirective",
+        "scope": 27,
+        "sourceUnit": 1609,
+        "src": "28:22:0",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/C/Users/Homeuser/Desktop/FITH-token-sale-v0.4.26/contracts/Owned.sol",
+        "file": "./Owned.sol",
+        "id": 3,
+        "nodeType": "ImportDirective",
+        "scope": 27,
+        "sourceUnit": 1858,
+        "src": "52:21:0",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/C/Users/Homeuser/Desktop/FITH-token-sale-v0.4.26/contracts/ERC20TokenBase.sol",
+        "file": "./ERC20TokenBase.sol",
+        "id": 4,
+        "nodeType": "ImportDirective",
+        "scope": 27,
+        "sourceUnit": 601,
+        "src": "75:30:0",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/C/Users/Homeuser/Desktop/FITH-token-sale-v0.4.26/contracts/SafeMathLib.sol",
+        "file": "./SafeMathLib.sol",
+        "id": 5,
+        "nodeType": "ImportDirective",
+        "scope": 27,
+        "sourceUnit": 1963,
+        "src": "107:27:0",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 6,
+              "name": "IERC20",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1608,
+              "src": "510:6:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IERC20_$1608",
+                "typeString": "contract IERC20"
+              }
+            },
+            "id": 7,
+            "nodeType": "InheritanceSpecifier",
+            "src": "510:6:0"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 8,
+              "name": "Owned",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1857,
+              "src": "518:5:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Owned_$1857",
+                "typeString": "contract Owned"
+              }
+            },
+            "id": 9,
+            "nodeType": "InheritanceSpecifier",
+            "src": "518:5:0"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 10,
+              "name": "ERC20TokenBase",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 600,
+              "src": "525:14:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_ERC20TokenBase_$600",
+                "typeString": "contract ERC20TokenBase"
+              }
+            },
+            "id": 11,
+            "nodeType": "InheritanceSpecifier",
+            "src": "525:14:0"
+          }
+        ],
+        "contractDependencies": [
+          600,
+          1608,
+          1857
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 26,
+        "linearizedBaseContracts": [
+          26,
+          600,
+          1857,
+          1608
+        ],
+        "name": "DaiToken",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "id": 14,
+            "libraryName": {
+              "contractScope": null,
+              "id": 12,
+              "name": "SafeMathLib",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1962,
+              "src": "551:11:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_SafeMathLib_$1962",
+                "typeString": "library SafeMathLib"
+              }
+            },
+            "nodeType": "UsingForDirective",
+            "src": "545:27:0",
+            "typeName": {
+              "id": 13,
+              "name": "uint",
+              "nodeType": "ElementaryTypeName",
+              "src": "567:4:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            }
+          },
+          {
+            "body": {
+              "id": 24,
+              "nodeType": "Block",
+              "src": "946:8:0",
+              "statements": []
+            },
+            "documentation": null,
+            "id": 25,
+            "implemented": true,
+            "isConstructor": true,
+            "isDeclaredConst": false,
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "argumentTypes": null,
+                    "hexValue": "444149",
+                    "id": 17,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "string",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "800:5:0",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_stringliteral_a5e92f3efb6826155f1f728e162af9d7cda33a574a1153b58f03ea01cc37e568",
+                      "typeString": "literal_string \"DAI\""
+                    },
+                    "value": "DAI"
+                  },
+                  {
+                    "argumentTypes": null,
+                    "hexValue": "44616920546f6b656e",
+                    "id": 18,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "string",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "821:11:0",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_stringliteral_a6063f92c3ec1283649ac003442ab535a895313211c6ea68faaf208272d8700d",
+                      "typeString": "literal_string \"Dai Token\""
+                    },
+                    "value": "Dai Token"
+                  },
+                  {
+                    "argumentTypes": null,
+                    "hexValue": "44616920546f6b656e2076312e30",
+                    "id": 19,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "string",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "846:16:0",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_stringliteral_8fd1e2a54395b5c3407c48eda7bc463385a67f81909bea1c445f5e910c317af7",
+                      "typeString": "literal_string \"Dai Token v1.0\""
+                    },
+                    "value": "Dai Token v1.0"
+                  },
+                  {
+                    "argumentTypes": null,
+                    "hexValue": "3138",
+                    "id": 20,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "number",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "880:2:0",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_rational_18_by_1",
+                      "typeString": "int_const 18"
+                    },
+                    "value": "18"
+                  },
+                  {
+                    "argumentTypes": null,
+                    "hexValue": "3130303030303030303030",
+                    "id": 21,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "number",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "900:11:0",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_rational_10000000000_by_1",
+                      "typeString": "int_const 10000000000"
+                    },
+                    "value": "10000000000"
+                  }
+                ],
+                "id": 22,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 16,
+                  "name": "ERC20TokenBase",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 600,
+                  "src": "780:14:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_type$_t_contract$_ERC20TokenBase_$600_$",
+                    "typeString": "type(contract ERC20TokenBase)"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "780:153:0"
+              }
+            ],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 15,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "774:2:0"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 23,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "946:0:0"
+            },
+            "scope": 26,
+            "src": "763:191:0",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 27,
+        "src": "489:468:0"
+      }
+    ],
+    "src": "0:957:0"
+  },
+  "legacyAST": {
+    "absolutePath": "/C/Users/Homeuser/Desktop/FITH-token-sale-v0.4.26/contracts/DaiToken.sol",
+    "exportedSymbols": {
+      "DaiToken": [
+        26
+      ]
+    },
+    "id": 27,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".26"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:0"
+      },
+      {
+        "absolutePath": "/C/Users/Homeuser/Desktop/FITH-token-sale-v0.4.26/contracts/IERC20.sol",
+        "file": "./IERC20.sol",
+        "id": 2,
+        "nodeType": "ImportDirective",
+        "scope": 27,
+        "sourceUnit": 1609,
+        "src": "28:22:0",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/C/Users/Homeuser/Desktop/FITH-token-sale-v0.4.26/contracts/Owned.sol",
+        "file": "./Owned.sol",
+        "id": 3,
+        "nodeType": "ImportDirective",
+        "scope": 27,
+        "sourceUnit": 1858,
+        "src": "52:21:0",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/C/Users/Homeuser/Desktop/FITH-token-sale-v0.4.26/contracts/ERC20TokenBase.sol",
+        "file": "./ERC20TokenBase.sol",
+        "id": 4,
+        "nodeType": "ImportDirective",
+        "scope": 27,
+        "sourceUnit": 601,
+        "src": "75:30:0",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/C/Users/Homeuser/Desktop/FITH-token-sale-v0.4.26/contracts/SafeMathLib.sol",
+        "file": "./SafeMathLib.sol",
+        "id": 5,
+        "nodeType": "ImportDirective",
+        "scope": 27,
+        "sourceUnit": 1963,
+        "src": "107:27:0",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 6,
+              "name": "IERC20",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1608,
+              "src": "510:6:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IERC20_$1608",
+                "typeString": "contract IERC20"
+              }
+            },
+            "id": 7,
+            "nodeType": "InheritanceSpecifier",
+            "src": "510:6:0"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 8,
+              "name": "Owned",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1857,
+              "src": "518:5:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_Owned_$1857",
+                "typeString": "contract Owned"
+              }
+            },
+            "id": 9,
+            "nodeType": "InheritanceSpecifier",
+            "src": "518:5:0"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 10,
+              "name": "ERC20TokenBase",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 600,
+              "src": "525:14:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_ERC20TokenBase_$600",
+                "typeString": "contract ERC20TokenBase"
+              }
+            },
+            "id": 11,
+            "nodeType": "InheritanceSpecifier",
+            "src": "525:14:0"
+          }
+        ],
+        "contractDependencies": [
+          600,
+          1608,
+          1857
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 26,
+        "linearizedBaseContracts": [
+          26,
+          600,
+          1857,
+          1608
+        ],
+        "name": "DaiToken",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "id": 14,
+            "libraryName": {
+              "contractScope": null,
+              "id": 12,
+              "name": "SafeMathLib",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1962,
+              "src": "551:11:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_SafeMathLib_$1962",
+                "typeString": "library SafeMathLib"
+              }
+            },
+            "nodeType": "UsingForDirective",
+            "src": "545:27:0",
+            "typeName": {
+              "id": 13,
+              "name": "uint",
+              "nodeType": "ElementaryTypeName",
+              "src": "567:4:0",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            }
+          },
+          {
+            "body": {
+              "id": 24,
+              "nodeType": "Block",
+              "src": "946:8:0",
+              "statements": []
+            },
+            "documentation": null,
+            "id": 25,
+            "implemented": true,
+            "isConstructor": true,
+            "isDeclaredConst": false,
+            "modifiers": [
+              {
+                "arguments": [
+                  {
+                    "argumentTypes": null,
+                    "hexValue": "444149",
+                    "id": 17,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "string",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "800:5:0",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_stringliteral_a5e92f3efb6826155f1f728e162af9d7cda33a574a1153b58f03ea01cc37e568",
+                      "typeString": "literal_string \"DAI\""
+                    },
+                    "value": "DAI"
+                  },
+                  {
+                    "argumentTypes": null,
+                    "hexValue": "44616920546f6b656e",
+                    "id": 18,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "string",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "821:11:0",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_stringliteral_a6063f92c3ec1283649ac003442ab535a895313211c6ea68faaf208272d8700d",
+                      "typeString": "literal_string \"Dai Token\""
+                    },
+                    "value": "Dai Token"
+                  },
+                  {
+                    "argumentTypes": null,
+                    "hexValue": "44616920546f6b656e2076312e30",
+                    "id": 19,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "string",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "846:16:0",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_stringliteral_8fd1e2a54395b5c3407c48eda7bc463385a67f81909bea1c445f5e910c317af7",
+                      "typeString": "literal_string \"Dai Token v1.0\""
+                    },
+                    "value": "Dai Token v1.0"
+                  },
+                  {
+                    "argumentTypes": null,
+                    "hexValue": "3138",
+                    "id": 20,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "number",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "880:2:0",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_rational_18_by_1",
+                      "typeString": "int_const 18"
+                    },
+                    "value": "18"
+                  },
+                  {
+                    "argumentTypes": null,
+                    "hexValue": "3130303030303030303030",
+                    "id": 21,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": true,
+                    "kind": "number",
+                    "lValueRequested": false,
+                    "nodeType": "Literal",
+                    "src": "900:11:0",
+                    "subdenomination": null,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_rational_10000000000_by_1",
+                      "typeString": "int_const 10000000000"
+                    },
+                    "value": "10000000000"
+                  }
+                ],
+                "id": 22,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 16,
+                  "name": "ERC20TokenBase",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 600,
+                  "src": "780:14:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_type$_t_contract$_ERC20TokenBase_$600_$",
+                    "typeString": "type(contract ERC20TokenBase)"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "780:153:0"
+              }
+            ],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 15,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "774:2:0"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 23,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "946:0:0"
+            },
+            "scope": 26,
+            "src": "763:191:0",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 27,
+        "src": "489:468:0"
+      }
+    ],
+    "src": "0:957:0"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.26+commit.4563c3fc.Emscripten.clang"
+  },
+  "networks": {
+    "5777": {
+      "events": {
+        "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "from",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "to",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "tokens",
+              "type": "uint256"
+            }
+          ],
+          "name": "Transfer",
+          "type": "event",
+          "signature": "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
+        },
+        "0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "owner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "spender",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "tokens",
+              "type": "uint256"
+            }
+          ],
+          "name": "Approval",
+          "type": "event",
+          "signature": "0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925"
+        }
+      },
+      "links": {},
+      "address": "0xdfF68ceABfE9396Ff6e6b7deCeA09DBbAeEC7138",
+      "transactionHash": "0xea7d3c099d807c4d9adcc8ebae3cc7f62e3a952b48a5de7e708ec4a8ade208dc"
+    }
+  },
+  "schemaVersion": "3.0.5",
+  "updatedAt": "2020-08-30T21:03:57.604Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {
+      "transferFrom(address,address,uint256)": {
+        "notice": "*** The user executing the function pays the transfer fees, not the funds owner"
+      }
+    }
+  }
+}

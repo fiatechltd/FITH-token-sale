@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="images/favicon.ico">
+
+    <title>Fiatech ETH discount promotion</title>
+    
+	<!-- Bootstrap-extend -->
+	<!--<link rel="stylesheet" href="css/bootstrap-extend.css">-->
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	
+  </head>
+
+<body class="">
+
+<div class="container" style="width: 650px;">
+  <div class="row">
+	<div class="col-lg-12">
+		<h1 class="text-center">Promotion steps</h1>
+		<hr/>
+		<br/>
+	</div>
+	<!--<div id="loader">
+	  <p class="text-center">Loading...</p>
+	</div>-->
+	<div id="content" class="text-center">
+	  <p>
+	    DAI user available balance <span class="dai-user-balance"></span>
+		<br/>
+		My DAI allowance for deposit <span class="dai-allowance"></span>
+		<br/>
+		DAI approve to deposit <input type="text" class="dai-approve-to-deposit"></input>
+		<br/><br/>
+		<button type="submit" onclick="App2.approveDaiDeposit();" class="btn btn-primary btn-lg">DAI approve deposit</button>
+	  </p>
+	  <br/>
+	  <p>
+		My DAI deposit <span class="dai-deposit-balance"></span>
+		<br/>
+		DAI to deposit <input type="text" class="dai-to-deposit"></input>
+		<br/><br/>
+	    <button type="submit" onclick="App2.depositDai();" class="btn btn-primary btn-lg">DAI deposit</button>
+		<br/><br/>
+		DAI to withdraw <input type="text" class="dai-to-withdraw"></input>
+		<br/><br/>
+	    <button type="submit" onclick="App2.withdrawDai();" class="btn btn-primary btn-lg">DAI withdraw</button>
+	  </p>
+	  <br/>
+	  <p>
+		ETH promo available <span class="eth-promo-available"></span>
+		<br/>
+		Buy ETH <input type="text" class="eth-promo-to-buy"></input>
+		<br/><br/>
+	    <button type="submit" onclick="App2.buyEthPromo();" class="btn btn-primary btn-lg">Buy ETH at discount</button>
+	  </p>
+	  <br>
+	  <hr>
+	  <p id="accountAddress"></p>
+	  <br>
+	  <p class="last-tx-info" hidden>View last transaction on Etherscan: <a class="last-tx-link" href="" target="_blank"></a></p>
+	  <br>
+	</div>
+  </div>
+</div>
+<!-- ./wrapper -->
+  	
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <!--<script src="vendor/truffle-contract/dist/truffle-contract.js"></script>-->
+    <script src="js/app2.js"></script>
+</body>
+</html>
