@@ -64,4 +64,4 @@ Note: Default web browser will open a tab with website on localhost:3000
  ```
 
 # License
-Check the [a relative link](LICENSE) file.
+Check the [LICENSE](LICENSE) file.
